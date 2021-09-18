@@ -1,0 +1,86 @@
+package com.coding.exersise.bookservice.controller;
+
+import com.coding.exersise.bookservice.model.Book;
+import com.coding.exersise.bookservice.service.BooksService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
+import static java.time.Month.JANUARY;
+import static java.time.Month.MAY;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(SpringExtension.class)
+@WebMvcTest(controllers = BooksController.class)
+@SpringBootTest
+class BooksControllerTest {
+    private final Book book1 = new Book("isbn1", "title 1", "author", LocalDate.of(1999, JANUARY, 20), 20);
+    private final Book book2 = new Book("isbn2", "title 2", "author", LocalDate.of(2000, MAY, 20), 30);
+
+    @Mock
+   // @Autowired
+    private BooksService BooksService;
+
+    @InjectMocks
+   // @Autowired
+    BooksController booksController;
+
+    @Autowired
+    private MockMvc mvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @BeforeEach
+    void setUp() {
+    }
+
+    @AfterEach
+    void tearDown() {
+    }
+
+    /*    @Test
+        void whenInputIsInvalid_thenReturnsStatus400() throws Exception {
+            Book input = invalidInput();
+            String body = objectMapper.writeValueAsString(input);
+
+            mvc.perform(post("/validateBody")
+                    .contentType("application/json")
+                    .content(body))
+                    .andExpect(status().isBadRequest());
+        }*/
+    @Test
+    void getBooks() {
+
+        when(BooksService.getAllBooks()).thenReturn(Arrays.asList(book1, book2));
+        ResponseEntity<List<Book>> listResponseEntity = booksController.getBooks();
+        assertNotNull(listResponseEntity);
+        List<Book> bookList = listResponseEntity.getBody();
+        assertNotNull(bookList);
+        assertTrue(bookList.size() == 2);
+    }
+
+    @Test
+    void getBook() {
+    }
+
+    @Test
+    void createBook() {
+    }
+}
