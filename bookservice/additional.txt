@@ -1,3 +1,6 @@
+-	Describe (no need to code) how you can secure this endpoint using Spring Security using Oauth2 in
+a file and include the text file in the root of the project.
+
 Google will be used as a Authorization Server.
 1) Add dependencies to build.gradle
   implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
@@ -27,6 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 3) Go to
   https://console.cloud.google.com/apis/credentials > create credentials> oath client id
 
+  add Authorised redirect URL
+  http://localhost:8081/login/oauth2/code/google
+
   Copy  Client id  and  Client secret
 
   add client id and client  secret to /src/main/resources/application.properties
@@ -52,5 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
  rating: 30
  }
  ]
+
+-	Describe any design pattern you have leveraged in your solution.
+MVC and
 
 
