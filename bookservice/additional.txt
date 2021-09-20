@@ -1,0 +1,56 @@
+Google will be used as a Authorization Server.
+1) Add dependencies to build.gradle
+  implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+  implementation 'org.springframework.boot:spring-boot-starter-security'
+  testImplementation 'org.springframework.security:spring-security-test'
+
+
+2) Add   a new class to the book-service  configurations package.
+package com.coding.exersise.bookservice.configurations;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+     public  void  configure(HttpSecurity httpSecurity) throws  Exception{
+
+        httpSecurity
+                .antMatcher("/**").authorizeRequests()
+                .anyRequest().authenticated().and().oauth2Login();
+    }
+
+}
+
+3) Go to
+  https://console.cloud.google.com/apis/credentials > create credentials> oath client id
+
+  Copy  Client id  and  Client secret
+
+  add client id and client  secret to /src/main/resources/application.properties
+  spring.security.oauth2.client.registration.google.client-id=
+  spring.security.oauth2.client.registration.google.client-secret=
+
+ 4) Open browser  and access http://localhost:8081/api/v1/books
+ The page will be redirected to Google account select page.
+ 5) After the proper google account is selected the content of http://localhost:8081/api/v1/books will be displayed
+
+ {
+ isbn: "isbn1",
+ title: "title 1",
+ author: "author",
+ datePublished: "1999-01-20",
+ rating: 20
+ },
+ {
+ isbn: "isbn2",
+ title: "title 2",
+ author: "author",
+ datePublished: "2000-05-20",
+ rating: 30
+ }
+ ]
+
+

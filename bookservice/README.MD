@@ -6,7 +6,7 @@ prerequisites installed : Github, JAVA 11,  Gradle, Postman.
    gradle assemble
 4) run
    java -jar build/libs/book-service-0.0.1-SNAPSHOT.jar
-5)open browser http://localhost:8081/h2-ui and verify two records in book table
+5)open browser http://localhost:8081/h2-ui and verify two records in book table are available.
 6)Run  get  request in Postman http://localhost:8081/books
    and verify output 
    [
@@ -35,7 +35,7 @@ prerequisites installed : Github, JAVA 11,  Gradle, Postman.
 "datePublished": "1999-01-20",
 "rating": 20
 }
- 8) Run post request with body
+ 8) Run Post request with body
 
    {
    "isbn": "isbn4",
@@ -46,7 +46,7 @@ prerequisites installed : Github, JAVA 11,  Gradle, Postman.
    }
 
 Then run http://localhost:8081/api/v1/books
-and verify results
+and verify results with added new book for  "isbn": "isbn4"
 [
 {
 "isbn": "isbn1",
