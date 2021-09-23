@@ -7,8 +7,8 @@ prerequisites installed : Github, JAVA 11,  Gradle, Postman.
 4) run
    java -jar build/libs/book-service-0.0.1-SNAPSHOT.jar
 5)open browser http://localhost:8081/h2-ui and verify two records in book table are available.
-6)Run  get  request in Postman http://localhost:8081/books
-   and verify output 
+6)Run  get  request in Postman  http://localhost:8081/api/v1/books
+   and verify output url 
    [
    {
    "isbn": "isbn1",
