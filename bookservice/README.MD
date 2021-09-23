@@ -35,7 +35,7 @@ prerequisites installed : Github, JAVA 11,  Gradle, Postman.
 "datePublished": "1999-01-20",
 "rating": 20
 }
- 8) Run Post request with body
+ 8) Run Post request in Postman http://localhost:8081/api/v1/books  with body
 
    {
    "isbn": "isbn4",
@@ -70,4 +70,31 @@ and verify results with added new book for  "isbn": "isbn4"
 "rating": 5
 }
 ]
+9) Run Post request in Postman http://localhost:8081/api/v1/books  with body
 
+{
+"isbn": "isbn4",
+"title": "Title 3",
+"author": "Author",
+"datePublished": "1980-04-07",
+"rating": 5
+}
+and verify response in Postman
+{
+"error": "Book with ISBN: isbn4 already exists"
+}
+
+10) Run Post request in Postman http://localhost:8081/api/v1/books  with body
+
+{
+"isbn": "isbn5",
+"title": "Title 3",
+"author": "Author",
+"datePublished": "1980-04-07",
+"rating": 5
+}
+and verify response in Postman
+
+{
+"error": "Book with Title: Title 3, Author: Author and  Date published: 1980-04-07 already exists"
+}
